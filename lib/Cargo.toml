@@ -7,3 +7,6 @@ edition = "2021"
 
 [dependencies]
 actix-web = "4"
+cc = "1.0.83"
+open = "5.0.1"
+chrono = "0.4.31"

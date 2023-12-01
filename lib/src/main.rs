@@ -1,39 +1,61 @@
-//use std::net::{ TcpListener, TcpStream };
-//use std::io::{ BufReader, prelude::* };
-//use std::{ error, fs, thread };
+use actix_web::{get, Responder, HttpServer, App, HttpResponse, web};
+use lib::Weight;
+use std::io::Result;
+use chrono::*;
+use std::fs::OpenOptions;
 
-/*fn request(mut stream: TcpStream) {
-    let buf_reader = BufReader::new(&mut stream);
+async fn manage_file() -> impl Responder {
+    let mut file = OpenOptions::new()
+        .write(true)
+        .append(true)
+        .create(false)
+        .open("../public/weight_statistics.txt")
+        .expect("File not found");
 
-    let _http_request: Vec<_> = buf_reader
-        .lines()
-        .map(|result| result.unwrap())
-        .take_while(|line| !line.is_empty())
-        .collect();
+    let content = file;
 
-    let status_line = "HTTP/1.1 200 OK \r\n text/html;";
-    let contents = fs::read_to_string("../web/index.html").unwrap();
-    let length = contents.len();
-    
-    let response = format!("
-        {status_line}\r\nContent-Length:
-        {length}\r\n\r\n
-        {contents}"
-    );
+    HttpResponse::Ok().body(file)
+}
 
-    stream.write_all(response.as_bytes()).unwrap();
-}*/
+async fn get_weight() -> impl Responder {
+    let weight = vec![
+        Weight {
+            id: 1,
+            weight: 80.5,
+            date: Utc::now(),
+        },
 
-fn main() {
-    /*let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
+        Weight {
+            id: 2,
+            weight: 77.4,
+            date: Utc::now(),
+        },
 
-    for tcp_stream in listener.incoming() {
-        let stream = tcp_stream.unwrap();
+        Weight {
+            id: 3,
+            weight: 78.2,
+            date: Utc::now(),
+        },
+    ];
 
-        thread::spawn(|| {
-            request(stream);
-        });
-    }
-    Ok(())*/
-    println!("Hello, world!");
+    HttpResponse::Ok().json(weight)
+}
+
+#[get("/")]
+async fn app() -> impl Responder {
+    HttpResponse::Ok().body("Hello, world!")
+}
+
+#[actix_web::main]
+async fn main() -> Result<()> {
+    HttpServer::new(|| {
+        App::new()
+            .service(app)
+            .route("/", web::get().to(manage_file))
+            .route("/", web::get().to(get_weight))
+
+    })
+        .bind(("127.0.0.1", 8080))?
+        .run()
+        .await
 }

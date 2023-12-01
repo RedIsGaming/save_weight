@@ -1,8 +1,8 @@
-use std::net::{ TcpListener, TcpStream };
-use std::io::{ BufReader, prelude::* };
-use std::{ error, fs, thread };
+//use std::net::{ TcpListener, TcpStream };
+//use std::io::{ BufReader, prelude::* };
+//use std::{ error, fs, thread };
 
-fn request(mut stream: TcpStream) {
+/*fn request(mut stream: TcpStream) {
     let buf_reader = BufReader::new(&mut stream);
 
     let _http_request: Vec<_> = buf_reader
@@ -22,10 +22,10 @@ fn request(mut stream: TcpStream) {
     );
 
     stream.write_all(response.as_bytes()).unwrap();
-}
+}*/
 
-fn main() -> Result<(), Box<dyn error::Error>> {
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
+fn main() {
+    /*let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
 
     for tcp_stream in listener.incoming() {
         let stream = tcp_stream.unwrap();
@@ -34,6 +34,6 @@ fn main() -> Result<(), Box<dyn error::Error>> {
             request(stream);
         });
     }
-
-    Ok(())
+    Ok(())*/
+    println!("Hello, world!");
 }

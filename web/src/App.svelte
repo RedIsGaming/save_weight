@@ -14,12 +14,13 @@
     </a>
   </div>
   <h1>Vite + Svelte</h1>
+  <h2 class="text-5xl text-red-500">Test</h2>
 
   <div class="card">
     <Counter />
   </div>
 
-  <p>
+  <p class="text-3xl">
     Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
   </p>
 

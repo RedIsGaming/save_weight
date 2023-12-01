@@ -1,0 +1,12 @@
+[package]
+name = "lib"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tabular = "0.2.0"
+async-std = { version = "1.12.0", features = ["attributes"] }
+async-semaphore = "1.2.0"
+html = "0.6.3"

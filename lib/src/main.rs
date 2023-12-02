@@ -5,7 +5,7 @@ use chrono::*;
 use std::fs::OpenOptions;
 
 async fn manage_file() -> impl Responder {
-    let mut file = OpenOptions::new()
+    let file = OpenOptions::new()
         .write(true)
         .append(true)
         .create(false)
@@ -14,7 +14,7 @@ async fn manage_file() -> impl Responder {
 
     let content = file;
 
-    HttpResponse::Ok().body(file)
+    HttpResponse::Ok().body("content")
 }
 
 async fn get_weight() -> impl Responder {
@@ -38,7 +38,7 @@ async fn get_weight() -> impl Responder {
         },
     ];
 
-    HttpResponse::Ok().json(weight)
+    HttpResponse::Ok().body("weight")
 }
 
 #[get("/")]
@@ -51,8 +51,8 @@ async fn main() -> Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(app)
-            .route("/", web::get().to(manage_file))
-            .route("/", web::get().to(get_weight))
+            .route("/m", web::get().to(manage_file))
+            .route("/g", web::get().to(get_weight))
 
     })
         .bind(("127.0.0.1", 8080))?

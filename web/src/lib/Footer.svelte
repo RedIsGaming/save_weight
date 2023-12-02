@@ -7,8 +7,8 @@
   }
 </script>
 
-<footer class="w-full h-10 bg-transparent bottom-0 left-0 fixed border-t-2">
-  <section class="h-10 flex justify-center items-center text-white">
+<footer class="w-full h-10 bg-transparant bottom-0 left-0 fixed border-t-2 dark:bg-transparant">
+  <section class="h-10 flex justify-center items-center text-gray-950 dark:text-white">
     <Icon src="{AtSymbol}" size="20" solid />
     <p>{current_year()} No Rights Reserved!</p>
   </section>

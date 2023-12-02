@@ -5,7 +5,7 @@
 
 <Navbar />
 <main class="w-full">
-  <article class="w-auto text-white flex justify-center my-5">
+  <article class="w-auto text-gray-950 flex justify-center my-5 dark:text-white">
     <section class="w-7/12 flex justify-center items-center">
       <h1 class="text-5xl">Hello, world!</h1>
     </section>

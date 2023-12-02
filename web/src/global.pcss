@@ -1,0 +1,89 @@
+*, html, body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-feature-settings: "kern";
+  font-kerning: normal;
+  font-weight: 300;
+  box-sizing: border-box;
+  transition: all 0.3s;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+  }
+}
+
+main, figure, figcaption, section, header, footer, table, label, textarea, nav, menu, aside, time, div, summary, details, form, input,
+button, code, marquee, address, th, tr, td, thead, tbody, a, h1, h2, h3, h4, h5, h6, i, p, b, span, strong, ul, ol, li, img, svg {
+  background: transparent;
+  color: inherit;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  &::before {
+    content: "";
+  }
+
+  &::after {
+    content: "";
+  }
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+ol {
+  background-color: transparent;
+}
+
+a, button, input, textarea, details {
+  border: none;
+  resize: none;
+  -webkit-appearance: none;
+  outline: none;
+
+  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &:disabled {
+    cursor: not-allowed !important;
+    opacity: .5;
+  }
+}
+
+button, input[type="submit"], input[type="button"] {
+  cursor: pointer;
+}
+
+input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button, input[type="search"]::-webkit-search-results-decoration { 
+    display: none; 
+}
+
+input[type="submit"], input[type="button"] { 
+    cursor: pointer; 
+}
+
+a, button, input, textarea, h1, h2, h3, h4, h5, h6, p {
+  font-weight: initial;
+  border: none;
+  margin: 0;
+}
+
+img {
+  pointer-events: none;
+
+  &::selection {
+    background-color: transparent;
+    color: transparent;
+  }
+}

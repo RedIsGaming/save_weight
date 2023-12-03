@@ -7,7 +7,6 @@ export const url = "http://localhost:8080";
 export default defineConfig({
   plugins: [svelte()],
   server: {
-    port: 8080,
     proxy: {
       "": {
         target: url,

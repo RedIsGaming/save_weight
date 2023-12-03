@@ -1,11 +1,14 @@
-use actix_web::{ get, Responder, HttpResponse, HttpServer, App, http };
+use actix_web::{ 
+    get, Responder, HttpResponse, HttpServer, App, http 
+};
+
 use lib::Weight;
 use std::io::Result;
 use chrono::*;
 use actix_cors::Cors;
 use std::vec;
 use actix_web::middleware::Logger;
-use std::net::{ IpAddr, Ipv4Addr };
+use std::net::Ipv4Addr;
 
 #[allow(unused)]
 async fn get_weight() -> impl Responder {
@@ -39,9 +42,11 @@ async fn app() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> Result<()> {
-    HttpServer::new(|| {
-        let cors = Cors::default()
-            .allowed_origin("localhost:5173")
+    let localhost = Ipv4Addr::LOCALHOST;
+
+    HttpServer::new(move || {
+        let _cors = Cors::default()
+            .allowed_origin(&format!("{}:5173", localhost))
             .allowed_methods(vec!["GET", "POST"])
             .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT])
             .allowed_header(http::header::CONTENT_TYPE)
@@ -49,10 +54,10 @@ async fn main() -> Result<()> {
 
         App::new()
             .service(app)
-            .wrap(cors)
+            .wrap(Cors::permissive())
             .wrap(Logger::default())
     })
-    .bind((IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080))?
+    .bind(((localhost), 8080))?
     .run()
     .await
 }

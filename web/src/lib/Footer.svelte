@@ -2,8 +2,7 @@
   import { Icon, AtSymbol } from "svelte-hero-icons";
 
   export function current_year(): number {
-    const year: Date = new Date();
-    return year.getFullYear();
+    return new Date().getFullYear();
   }
 </script>
 

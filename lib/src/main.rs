@@ -1,5 +1,5 @@
 use actix_web::{ 
-    get, Responder, HttpResponse, HttpServer, App, http 
+    get, Responder, HttpResponse, HttpServer, App, http::{self, KeepAlive} 
 };
 
 use lib::Weight;
@@ -7,8 +7,11 @@ use std::io::Result;
 use chrono::*;
 use actix_cors::Cors;
 use std::vec;
+
 use actix_web::middleware::Logger;
 use std::net::Ipv4Addr;
+use std::time::Duration;
+use db::{ insert, select, connection };
 
 #[allow(unused)]
 async fn get_weight() -> impl Responder {
@@ -57,7 +60,11 @@ async fn main() -> Result<()> {
             .wrap(Cors::permissive())
             .wrap(Logger::default())
     })
-    .bind(((localhost), 8080))?
+    .workers(4)
+    .keep_alive(KeepAlive::Timeout(
+        Duration::from_secs(10)
+    ))
+    .bind((localhost, 8080))?
     .run()
     .await
 }
